@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Clone the project
 
-`git clone <project url`
+`git clone git@github.com:briankhdo/react-stopwatch.git`
 
 ### Install dependencies
 
