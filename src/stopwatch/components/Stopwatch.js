@@ -22,35 +22,23 @@ class Stopwatch extends Component {
   }
 
   updateTimer() {
-    const { startTime } = this.state;
-    this.setState({ time: Date.now() - startTime });
+    const { startTime, isRunning } = this.state;
+    if (isRunning) this.setState({ time: Date.now() - startTime });
   }
 
   start() {
     const { time } = this.state;
-    this.setState(
-      {
-        isRunning: true,
-        startTime: time > 0 ? Date.now() - time : Date.now(),
-      },
-      () => {
-        this.timerRef = setInterval(() => {
-          this.updateTimer(10);
-        }, 10);
-      }
-    );
+    this.setState({
+      isRunning: true,
+      startTime: time > 0 ? Date.now() - time : Date.now(),
+    });
   }
 
   pause() {
-    this.setState(
-      {
-        isRunning: false,
-        startTime: Date.now(),
-      },
-      () => {
-        clearInterval(this.timerRef);
-      }
-    );
+    this.setState({
+      isRunning: false,
+      startTime: Date.now(),
+    });
   }
 
   reset() {

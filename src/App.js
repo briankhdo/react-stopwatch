@@ -20,8 +20,7 @@ class App extends Component {
   }
 
   update() {
-    this.stopwatch.updateTimer();
-
+    this.stopwatch.current.updateTimer();
     this.animationID = window.requestAnimationFrame(() => this.update());
   }
 
