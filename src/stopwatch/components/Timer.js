@@ -1,4 +1,6 @@
-import React, { PropTypes, Component } from "react";
+import PropTypes from "prop-types";
+
+import React, { Component } from "react";
 import "./Timer.css";
 
 import timeFormat from "../utils/timeFormat";

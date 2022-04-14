@@ -8,6 +8,7 @@ import LapTimeList from "./LapTimeList";
 function getDefaultState() {
   return {
     isRunning: false,
+    startTime: 0,
     time: 0,
     timeList: [],
   };
@@ -20,28 +21,31 @@ class Stopwatch extends Component {
     this.timerRef = null;
   }
 
-  updateTimer(extraTime) {
-    const { time } = this.state;
-    this.setState({ time: time + extraTime });
+  updateTimer() {
+    const { startTime } = this.state;
+    this.setState({ time: Date.now() - startTime });
   }
 
   start() {
+    const { time } = this.state;
     this.setState(
       {
         isRunning: true,
+        startTime: time > 0 ? Date.now() - time : Date.now(),
       },
       () => {
         this.timerRef = setInterval(() => {
-          this.updateTimer(100);
-        }, 100);
+          this.updateTimer(10);
+        }, 10);
       }
     );
   }
 
-  stop() {
+  pause() {
     this.setState(
       {
         isRunning: false,
+        startTime: Date.now(),
       },
       () => {
         clearInterval(this.timerRef);
@@ -73,9 +77,10 @@ class Stopwatch extends Component {
         <Controls
           isRunning={isRunning}
           start={() => this.start()}
-          stop={() => this.stop()}
+          pause={() => this.pause()}
           reset={() => this.reset()}
           addLapTime={() => this.addLapTime()}
+          time={time}
         />
 
         <LapTimeList timeList={timeList} />
