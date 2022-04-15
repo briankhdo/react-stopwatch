@@ -30,7 +30,7 @@ class Stopwatch extends Component {
     const { time } = this.state;
     this.setState({
       isRunning: true,
-      startTime: time > 0 ? Date.now() - time : Date.now(),
+      startTime: Date.now() - time,
     });
   }
 
